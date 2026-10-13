@@ -1,0 +1,18 @@
+{
+  "model": "complex_cnn",
+  "img_size": 224,
+  "parameters": 3067673,
+  "best_epoch": 17,
+  "valid": {
+    "accuracy": 0.9701492537313433,
+    "macro_precision": 0.9713521204089849,
+    "macro_recall": 0.9700268086994633,
+    "macro_f1": 0.9704016928997808
+  },
+  "test": {
+    "accuracy": 0.9725609756097561,
+    "macro_precision": 0.9737325192999574,
+    "macro_recall": 0.9740726526662554,
+    "macro_f1": 0.9737473655455894
+  }
+}

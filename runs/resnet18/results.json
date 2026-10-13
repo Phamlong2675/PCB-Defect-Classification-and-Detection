@@ -1,0 +1,18 @@
+{
+  "model": "resnet18",
+  "img_size": 224,
+  "parameters": 11179590,
+  "best_epoch": 20,
+  "valid": {
+    "accuracy": 0.9960199004975124,
+    "macro_precision": 0.9963901354608161,
+    "macro_recall": 0.9963443963443964,
+    "macro_f1": 0.9963549911616131
+  },
+  "test": {
+    "accuracy": 0.9898373983739838,
+    "macro_precision": 0.9905445526311202,
+    "macro_recall": 0.9906924334537135,
+    "macro_f1": 0.9905945656186738
+  }
+}
