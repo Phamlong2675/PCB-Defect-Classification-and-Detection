@@ -83,7 +83,7 @@ Chạy lệnh tương ứng sau khi chỉnh `MODE` và `RUN_ID`:
 
 Ba dòng trên là ba lựa chọn model; chỉ chạy dòng cần dùng. Sau khi transfer hoàn tất, đổi `MODE="finetune"`, giữ nguyên `RUN_ID`, rồi chạy lại cùng file.
 
-Transfer tự ghi đường dẫn `best.pt` vào `<model>_aug_transfer_best_run<ID>.txt`. Fine-tune đọc đúng file này, bắt đầu optimizer/lịch học mới với `resume=False`. Không đưa các file đường dẫn tuyệt đối này lên Git.
+Transfer tự ghi đường dẫn `best.pt` vào `<model>_aug_transfer_best_run<ID>.txt`. Fine-tune ưu tiên file này; nếu chưa có, dùng `runs/<model>_640_aug_frozen_run<ID>/weights/best.pt`. Cả hai cách đều bắt đầu optimizer/lịch học mới với `resume=False`. Không đưa các file đường dẫn tuyệt đối này lên Git. Repo chỉ kèm transfer YOLOv8s Run 3; các model/run khác cần train transfer hoặc nhận checkpoint riêng trước khi fine-tune.
 
 Kết quả được lưu dưới `PCB_learning/runs/`:
 
@@ -131,18 +131,30 @@ PR curve của Ultralytics thể hiện IoU = 0.5. Script tối giản hiện d�
 
 Script tìm checkpoint theo tên folder gốc ở trên. Nếu train lại tạo folder hậu tố như `-2`, cần trỏ `weights` trong script test tới đúng folder thực tế trước khi đánh giá.
 
-## 6. Dùng checkpoint được chia sẻ, không train lại
+## 6. Test ngay hai checkpoint tốt nhất đã có trong repo
 
-Clone repo không kèm pretrained weights hoặc checkpoint đã huấn luyện. Để test checkpoint được nhận riêng, đặt nó đúng vị trí, ví dụ:
+Sau khi clone và cài thư viện, repo đã có hai checkpoint YOLOv8s được chọn theo validation mAP@0.5:0.95:
+
+| Phase | Run | Seed | Validation mAP@0.5:0.95 | Epoch tốt nhất |
+| --- | --- | --- | --- | --- |
+| Transfer | 3 | 2052798190 | 75,059% | 23 |
+| Fine-tuning | 1 | 876847882 | 77,824% | 23 |
+
+Fine-tuning Run 1 được train tiếp từ transfer Run 1, không phải transfer Run 3. Đây là hai checkpoint tốt nhất được chọn độc lập theo từng giai đoạn.
 
 ```text
+PCB_learning/runs/yolov8s_640_aug_frozen_run3/weights/best.pt
 PCB_learning/runs/yolov8s_640_aug_finetune_run1/weights/best.pt
 ```
 
-Giữ seed file tương ứng và chọn đúng `MODEL`, `PHASE`, `SEED`. Nếu muốn fine-tune một checkpoint transfer được nhập từ nơi khác, cập nhật file `<model>_aug_transfer_best_run<ID>.txt` thành đường dẫn tuyệt đối tới transfer `best.pt`, lưu UTF-8 không BOM.
+Chạy ngay fine-tuning bằng lệnh ở mục 5, không cần train hoặc tải pretrained weights. Muốn test transfer, đặt `MODEL="yolov8s"`, `PHASE="transfer"`, `SEED=2052798190`, rồi chạy cùng lệnh. Máy không có CUDA vẫn test được bằng CPU.
+
+Kết quả train gốc gồm `results.csv`, `results.png`, `args.yaml`, đường cong PR, confusion matrix và ảnh mẫu trong hai thư mục run. Những đường cong/ma trận trong run thuộc validation. Kết quả test mới trên dataset hiện tại nằm ở [reports/yolo/test](../reports/yolo/test); xem [giải thích kết quả và cách chọn checkpoint](../reports/yolo/README.md).
+
+Nếu nhận checkpoint khác riêng, giữ seed file tương ứng và đặt `best.pt` vào đúng cấu trúc run. Muốn fine-tune checkpoint transfer từ nơi khác, có thể cập nhật file `<model>_aug_transfer_best_run<ID>.txt` thành đường dẫn tuyệt đối tới checkpoint, lưu UTF-8 không BOM.
 
 ## 7. File nên đưa lên GitHub
 
 Đưa lên: ba file training, `pcb_augmentation.py`, `test_pcb.py`, README và ba seed file; kèm README chính, requirements và .gitignore ở gốc repo.
 
-Giữ local: `.venv/`, `runs/`, `testing/`, `*.pt`, label cache, `pcb_640_local.yaml` và các file trỏ checkpoint. Có thể đưa các bảng/ảnh đã chọn vào `reports/yolo/`, thay vì commit toàn bộ output. Checkpoint chia sẻ bằng kho lưu trữ riêng hoặc [GitHub Releases](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases).
+Ngoại lệ đã đưa lên Git: hai `best.pt` YOLOv8s ở mục 6, kết quả train gốc tương ứng và kết quả test đã chọn trong `reports/yolo/test/`. Các checkpoint/run còn lại, `last.pt`, `.venv/`, output test mới, label cache, `pcb_640_local.yaml` và file trỏ checkpoint giữ local.

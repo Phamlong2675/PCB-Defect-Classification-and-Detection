@@ -1,0 +1,3 @@
+﻿model,phase,run,seed,selection_metric,validation_mAP50_95,best_epoch,checkpoint,sha256
+yolov8s,transfer,3,2052798190,validation_mAP50_95,0.75059,23,PCB_learning/runs/yolov8s_640_aug_frozen_run3/weights/best.pt,f796e2947ed311aef1349fb99e58cb4b3e29e8a55d055b58647de2d8b13bf323
+yolov8s,finetune,1,876847882,validation_mAP50_95,0.77824,23,PCB_learning/runs/yolov8s_640_aug_finetune_run1/weights/best.pt,85654198b74ef33608379a7dcb910de8861a70ea3bfd6d4ff45c425b0a2bab2f

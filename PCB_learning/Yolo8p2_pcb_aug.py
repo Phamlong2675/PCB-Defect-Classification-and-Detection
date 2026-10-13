@@ -12,9 +12,10 @@ def main():
     assert MODE in ("transfer", "finetune")
     seed = make_random_seed(RUN_ID)
     transfer = MODE == "transfer"
-    if not transfer:
-        assert BEST_PATH_FILE.is_file(), f"Run transfer for RUN_ID={RUN_ID} first"
-    weights = "yolov8s.pt" if transfer else Path(BEST_PATH_FILE.read_text(encoding="utf-8").strip())
+    # Clone repo dùng checkpoint transfer có sẵn; train mới ưu tiên file trỏ vừa lưu.
+    weights = "yolov8s.pt" if transfer else (
+        Path(BEST_PATH_FILE.read_text(encoding="utf-8").strip()) if BEST_PATH_FILE.is_file()
+        else ROOT / "runs" / f"yolov8s_p2_640_aug_frozen_run{RUN_ID}/weights/best.pt")
     if not transfer:
         assert weights.is_file(), f"Missing checkpoint: {weights}"
     data = make_dataset_yaml()
