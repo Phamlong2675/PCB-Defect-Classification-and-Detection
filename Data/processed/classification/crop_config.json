@@ -1,0 +1,32 @@
+{
+  "source_variant": "detection_640",
+  "output_size": 224,
+  "interpolation": "bicubic",
+  "output_mode": "RGB",
+  "context_levels": [
+    [
+      0.75,
+      96
+    ],
+    [
+      0.5,
+      80
+    ],
+    [
+      0.35,
+      64
+    ],
+    [
+      0.25,
+      48
+    ],
+    [
+      0.1,
+      32
+    ]
+  ],
+  "min_margin_ratio": 0.1,
+  "box_fallback": true,
+  "augmentation_applied": false,
+  "background_class": false
+}

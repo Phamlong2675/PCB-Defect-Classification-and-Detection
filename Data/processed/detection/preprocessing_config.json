@@ -1,0 +1,7 @@
+{
+  "source": "Data\\raw_data",
+  "spatial_mode": "none",
+  "target_size": 640,
+  "output_format": "RGB PNG",
+  "augmentation_applied": false
+}
