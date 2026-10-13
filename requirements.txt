@@ -1,0 +1,16 @@
+numpy>=2.0
+pandas>=2.0
+Pillow>=10.0
+matplotlib>=3.8
+imagehash>=4.3
+scikit-learn>=1.4
+tqdm>=4.66
+jupyter>=1.0
+ipykernel>=6.0
+torch
+torchvision
+
+# YOLO experiments (versions used in the recorded runs)
+ultralytics==8.4.174
+albumentations==2.0.8
+PyYAML==6.0.3

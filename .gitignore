@@ -1,0 +1,34 @@
+# Local dataset and generated preprocessing artifacts
+/Data/raw_data/
+/Data/derived/
+/Data/processed/*
+# Existing tracked classification/detection datasets stay tracked.
+
+# Notebook and Python runtime files
+/.ipynb_checkpoints/
+__pycache__/
+*.py[cod]
+
+# Training outputs and model exports
+/runs/
+/checkpoints/
+/weights/
+runs/
+testing/
+test_results/
+report_figures_5_4/
+archive_unselected*/
+*.pt
+*.pth
+*.onnx
+*.engine
+
+# Local environments
+/.venv/
+/venv/
+
+# Machine-specific YOLO config, generated checkpoint pointers and label caches
+pcb_640_local.yaml
+*_aug_transfer_best_run*.txt
+yolov8s_p2_transfer_best.txt
+*.cache
