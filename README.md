@@ -23,9 +23,11 @@ Deep-Learning-PCB-Defect-Detection/
     pcb_aug_seed_run2.txt
     pcb_aug_seed_run3.txt
   EDA.ipynb
+  Data_preprocessing.ipynb
   simple_cnn_model.py
   complex_cnn.py
   resnet18.py
+  predict_simple_cnn.py
   predict_complex_cnn.py
   predict_resnet18.py
   requirements.txt
