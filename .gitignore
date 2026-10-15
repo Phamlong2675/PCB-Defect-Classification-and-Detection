@@ -17,15 +17,6 @@ __pycache__/
 /.venv/
 /venv/
 
-# YOLO local outputs and machine-specific configuration.
-/PCB_learning/testing/
-/PCB_learning/runs/*
-pcb_640_local.yaml
-*_aug_transfer_best_run*.txt
-*.cache
-
-# Publish only the selected YOLOv8s runs and their best checkpoints.
-!/PCB_learning/runs/yolov8s_640_aug_frozen_run3/
-!/PCB_learning/runs/yolov8s_640_aug_finetune_run1/
-!/PCB_learning/runs/yolov8s_640_aug_frozen_run3/weights/best.pt
-!/PCB_learning/runs/yolov8s_640_aug_finetune_run1/weights/best.pt
+.vscode/
+simple_cnn.ipynb
+yolo.ipynb
